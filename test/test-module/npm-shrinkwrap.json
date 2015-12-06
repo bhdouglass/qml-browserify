@@ -1,0 +1,16 @@
+{
+  "name": "test-module",
+  "version": "1.0.0",
+  "dependencies": {
+    "alpha-sort": {
+      "version": "1.0.2",
+      "from": "alpha-sort@latest",
+      "resolved": "https://registry.npmjs.org/alpha-sort/-/alpha-sort-1.0.2.tgz"
+    },
+    "uniq": {
+      "version": "1.0.1",
+      "from": "uniq@latest",
+      "resolved": "https://registry.npmjs.org/uniq/-/uniq-1.0.1.tgz"
+    }
+  }
+}

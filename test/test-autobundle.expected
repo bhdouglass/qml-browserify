@@ -1,0 +1,116 @@
+//QML Browserify - original prelude from browser-pack
+var modules = (function outer (modules, cache, entry) {
+    var previousRequire = typeof require == "function" && require;
+    function newRequire(name, jumped){
+        if(!cache[name]) {
+            if(!modules[name]) {
+                var currentRequire = typeof require == "function" && require;
+
+                if (!jumped && currentRequire) return currentRequire(name, true);
+
+                if (previousRequire) return previousRequire(name, true);
+
+                var err = new Error('Cannot find module \'' + name + '\'');
+                err.code = 'MODULE_NOT_FOUND';
+                throw err;
+
+            }
+
+            var m = cache[name] = {exports:{}};
+            modules[name][0].call(m.exports, function(x){
+                var id = modules[name][1][x];
+                return newRequire(id ? id : x);
+            },m,m.exports,outer,modules,cache,entry);
+        }
+
+        return cache[name].exports;
+    }
+
+    for(var i=0;i<entry.length;i++) newRequire(entry[i]);
+
+    return newRequire(entry[0]);
+})
+({1:[function(require,module,exports){
+module.exports = {"alpha-sort": require("alpha-sort"),"uniq": require("uniq"),}
+},{"alpha-sort":2,"uniq":3}],2:[function(require,module,exports){
+'use strict';
+
+// localCompare works in Node 0.10, but broken in 0.12 and io.js
+var brokenLocaleCompare = 'a'.localeCompare('å') === -1;
+
+function compare(a, b) {
+	if (brokenLocaleCompare) {
+		return a > b ? 1 : a < b ? -1 : 0;
+	}
+
+	return a === b ? 0 : a.localeCompare(b);
+}
+
+exports.asc = function (a, b) {
+	return compare(a, b);
+};
+
+exports.desc = function (a, b) {
+	return compare(b, a);
+};
+
+},{}],3:[function(require,module,exports){
+"use strict"
+
+function unique_pred(list, compare) {
+  var ptr = 1
+    , len = list.length
+    , a=list[0], b=list[0]
+  for(var i=1; i<len; ++i) {
+    b = a
+    a = list[i]
+    if(compare(a, b)) {
+      if(i === ptr) {
+        ptr++
+        continue
+      }
+      list[ptr++] = a
+    }
+  }
+  list.length = ptr
+  return list
+}
+
+function unique_eq(list) {
+  var ptr = 1
+    , len = list.length
+    , a=list[0], b = list[0]
+  for(var i=1; i<len; ++i, b=a) {
+    b = a
+    a = list[i]
+    if(a !== b) {
+      if(i === ptr) {
+        ptr++
+        continue
+      }
+      list[ptr++] = a
+    }
+  }
+  list.length = ptr
+  return list
+}
+
+function unique(list, compare, sorted) {
+  if(list.length === 0) {
+    return list
+  }
+  if(compare) {
+    if(!sorted) {
+      list.sort(compare)
+    }
+    return unique_pred(list, compare)
+  }
+  if(!sorted) {
+    list.sort()
+  }
+  return unique_eq(list)
+}
+
+module.exports = unique
+
+},{}]},{},[1]);

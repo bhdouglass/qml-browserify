@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+var qbrowserify = require('../src/index');
+var minimist = require('minimist');
+
+var args = minimist(process.argv.slice(2), {
+    default: {
+        input: '',
+        output: '',
+    },
+    alias: {
+      input: 'i',
+      output: 'o',
+    }
+});
+
+var options = {
+  dirname: '.',
+  input: args.input,
+  output: args.output,
+};
+
+function callback(err, src) {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  else {
+    if (!args.output) {
+      console.log(src);
+    }
+
+    process.exit(0);
+  }
+}
+
+if (args.input) {
+  qbrowserify.bundle(options, callback);
+}
+else {
+  qbrowserify.autobundle(options, callback);
+}

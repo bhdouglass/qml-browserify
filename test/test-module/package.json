@@ -1,0 +1,12 @@
+{
+  "name": "test-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Brian Douglass",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "alpha-sort": "^1.0.2",
+    "uniq": "^1.0.1"
+  }
+}
