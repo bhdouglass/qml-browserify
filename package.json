@@ -11,6 +11,7 @@
   "bin": {
     "qml-browserify": "bin/qml-browserify"
   },
+  "preferGlobal": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/bhdouglass/qml-browserify.git"
