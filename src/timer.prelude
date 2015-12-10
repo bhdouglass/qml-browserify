@@ -1,0 +1,21 @@
+var setTimeout = function(fn, interval) {
+    console.error('setTimeout not setup');
+};
+
+var clearTimeout = function(id) {
+    console.error('clearTimeout not setup');
+};
+
+function setupTimeout(timer) {
+    setTimeout = function(fn, interval) {
+        timer.interval = interval ? interval : 0;
+        timer.repeat = false;
+        timer.running = true;
+        timer.callback = fn;
+    };
+
+    clearTimeout = function(id) {
+        timer.running = false;
+        timer.callback = function() {};
+    }
+}

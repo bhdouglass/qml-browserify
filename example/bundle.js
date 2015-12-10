@@ -1,3 +1,28 @@
+var global = {
+    XMLHttpRequest: XMLHttpRequest,
+    location: {},
+};
+var setTimeout = function(fn, interval) {
+    console.error('setTimeout not setup');
+};
+
+var clearTimeout = function(id) {
+    console.error('clearTimeout not setup');
+};
+
+function setupTimeout(timer) {
+    setTimeout = function(fn, interval) {
+        timer.interval = interval ? interval : 0;
+        timer.repeat = false;
+        timer.running = true;
+        timer.callback = fn;
+    };
+
+    clearTimeout = function(id) {
+        timer.running = false;
+        timer.callback = function() {};
+    }
+}
 //QML Browserify - original prelude from browser-pack
 var modules = (function outer (modules, cache, entry) {
     var previousRequire = typeof require == "function" && require;

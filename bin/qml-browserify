@@ -4,20 +4,29 @@ var qbrowserify = require('../src/index');
 var minimist = require('minimist');
 
 var args = minimist(process.argv.slice(2), {
-    default: {
-        input: '',
-        output: '',
-    },
-    alias: {
-      input: 'i',
-      output: 'o',
-    }
+  default: {
+    input: '',
+    output: '',
+    globals: true,
+    timer: false,
+    promise: false,
+  },
+  boolean: true,
+  alias: {
+    input: 'i',
+    output: 'o',
+  }
 });
 
 var options = {
   dirname: '.',
   input: args.input,
   output: args.output,
+  preludes: {
+    globals: args.globals,
+    timer: args.timer,
+    promise: args.promise,
+  }
 };
 
 function callback(err, src) {

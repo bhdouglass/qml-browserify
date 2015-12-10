@@ -14,6 +14,39 @@ Bundle all dependencies in a module: `qml-browserify -o bundle.js`
 
 Bundle and print to the console: `qml-browserify -i index.js`
 
+Bundle without global variable: `qml-browserify --globals`
+
+Bundle with Timer pollyfill (see below for setup): `qml-browserify --timer`
+
+Bundle with Promise pollyfill: `qml-browserify --promise`
+
+## Using the Timer pollyfill
+
+In order to use the Timer pollyfill you have to use a qml Timer component and call
+Bundle.setupTimeout() with the id of that Timer. *This pollyfill is very limited
+and should be used with caution!* For example:
+
+```
+Timer {
+  id: timer
+  property var callback: function() {}
+  interval: 500
+  running: false
+  repeat: false
+  onTriggered: {
+    timer.callback();
+  }
+}
+
+Component.onCompleted: {
+  Bundle.setupTimeout(timer);
+}
+```
+
+## Promise pollyfill
+
+The Promise pollyfill used by qml-browserify is [Promise by taylorhakes ](https://github.com/taylorhakes/promise-polyfill)
+
 ## License ##
 
 Copyright (C) 2015 [Brian Douglass](http://bhdouglass.com/)

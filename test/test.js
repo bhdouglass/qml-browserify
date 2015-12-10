@@ -7,7 +7,15 @@ describe('qml-browserify', function() {
     it('should bundle without error', function(done) {
       var actualFile = __dirname + '/test-autobundle.actual';
       var expectedFile = __dirname + '/test-autobundle.expected';
-      qbrowserify.autobundle({dirname: __dirname + '/test-module', output: actualFile}, function(err, src) {
+      qbrowserify.autobundle({
+        dirname: __dirname + '/test-module',
+        output: actualFile,
+        preludes: {
+          globals: true,
+          timer: false,
+          promise: false,
+        },
+      }, function(err, src) {
         if (err) {
           throw err;
         }
@@ -41,7 +49,10 @@ describe('qml-browserify', function() {
     it('should bundle without error', function(done) {
       var actualFile = __dirname + '/test-bundle.actual';
       var expectedFile = __dirname + '/test-bundle.expected';
-      qbrowserify.bundle({input: __dirname + '/test-module/index.js', output: actualFile}, function(err, src) {
+      qbrowserify.bundle({
+        input: __dirname + '/test-module/index.js',
+        output: actualFile,
+      }, function(err, src) {
         if (err) {
           throw err;
         }

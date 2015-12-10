@@ -11,6 +11,22 @@ Window {
 
   property var arr: [1, 1, 2, 2, 3, 3]
 
+  Timer {
+    id: timer
+    property var callback: function() {}
+    interval: 500
+    running: false
+    repeat: false
+    onTriggered: {
+      console.log('timer');
+      timer.callback();
+    }
+  }
+
+  Component.onCompleted: {
+    Bundle.setupTimeout(timer);
+  }
+
   Text {
     id: duplicated
 
