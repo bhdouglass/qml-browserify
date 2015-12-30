@@ -1,12 +1,12 @@
-# QML Browserify #
+# QML Browserify
 
 Browserify for QML
 
-## Install ##
+## Install
 
 `npm install -g qml-browserify`
 
-## Usage ##
+## Bundling
 
 Bundle a js file: `qml-browserify -i index.js -o bundle.js`
 
@@ -19,6 +19,16 @@ Bundle without global variable: `qml-browserify --globals`
 Bundle with Timer pollyfill (see below for setup): `qml-browserify --timer`
 
 Bundle with Promise pollyfill: `qml-browserify --promise`
+
+## Usage
+
+After bundling, import the bundled js file into your qml with something similar
+to `import 'bundle.js' as Bundle`. If you bundled a file you can use `Bundle.modules`
+as what you exported from your file (this could be a object, function, etc,
+depending on what you export). If you bundled your dependencies you can use
+`Bundle.modules` and an object containing all the dependencies.
+
+For a complete example, check out the example program in the `example` directory.
 
 ## Using the Timer pollyfill
 
