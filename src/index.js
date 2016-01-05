@@ -8,6 +8,7 @@ function bundle(options, callback) {
     'globals',
     'timer',
     'promise',
+    'formdata',
   ];
 
   options = assign({
@@ -18,12 +19,17 @@ function bundle(options, callback) {
       globals: true,
       timer: false,
       promise: false,
+      formdata: false,
     },
   }, options);
 
   if (options.preludes.promise) {
     options.preludes.globals = true;
     options.preludes.timer = true;
+  }
+
+  if (options.preludes.formdata) {
+    options.preludes.globals = true;
   }
 
   var prelude = '';

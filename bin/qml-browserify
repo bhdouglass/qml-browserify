@@ -10,6 +10,7 @@ var args = minimist(process.argv.slice(2), {
     globals: true,
     timer: false,
     promise: false,
+    formdata: false,
   },
   boolean: true,
   alias: {
@@ -26,6 +27,7 @@ var options = {
     globals: args.globals,
     timer: args.timer,
     promise: args.promise,
+    formdata: args.formdata,
   }
 };
 
