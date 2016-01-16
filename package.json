@@ -1,6 +1,6 @@
 {
   "name": "qml-browserify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Browserify for QML",
   "main": "src/index.js",
   "author": "Brian Douglass",
